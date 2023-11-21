@@ -1,12 +1,15 @@
 package com.deyi.daxie.cloud.operation.utils;
 
 import com.deyi.daxie.cloud.operation.domain.WarnData;
+import com.deyi.daxie.cloud.operation.domain.dto.CountType;
+import com.deyi.daxie.cloud.operation.domain.dto.WarnCountDto;
 import com.deyi.daxie.cloud.operation.domain.dto.WarnDataTypeDto;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Description: WarnDataUtil
@@ -69,6 +72,38 @@ public class WarnDataUtil {
                     field.setAccessible(true);
                     if(field.getType() == Boolean.class && (Boolean)field.get(it)){
                         ls.add(new WarnDataTypeDto(it.getId(), it.getDeviceNum(), it.getDeviceTime(), typeField.get(field.getName())));
+                    }
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public static void getTypeListByTime(WarnCountDto ls, List<WarnData> data) {
+        AtomicInteger one = new AtomicInteger();
+        AtomicInteger two = new AtomicInteger();
+        Map<String,Integer> map = new HashMap<>();
+        data.stream().forEach(it -> {
+            Class clazz = it.getClass();
+            Field[] fields = clazz.getDeclaredFields();
+            for (Field field : fields) {
+                try {
+                    field.setAccessible(true);
+                    if (field.getType() == Boolean.class && (Boolean) field.get(it)) {
+                        int count=1;
+                        if (TypEnum.valueOf(field.getName()).getDesc().equals("一级报警")&&((Boolean) field.get(it)).booleanValue()&&field.get(it).equals(true)){
+                            CountType typeCount = new CountType();
+                            count = one.getAndIncrement();
+                            map.put("一级告警",typeCount.setOne(count+1));
+                        } else if (TypEnum.valueOf(field.getName()).getDesc().equals("二级报警")&&((Boolean) field.get(it)).booleanValue()&&field.get(it).equals(true)){
+                            CountType typeCount = new CountType();
+                            count = two.getAndIncrement();
+                            map.put("二级报警",typeCount.setTwo(count+1));
+                        }
+                        ls.setDeviceTime(it.getDeviceTime());
+                        ls.setDeviceNum(it.getDeviceNum());
+                        ls.setCount(map);
                     }
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
