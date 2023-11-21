@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.deyi.daxie.cloud.vehicle.query.mapper.VehicleInfoMapper">
+
+    <sql id="selectConfigVo">
+        SELECT vin,
+               plateNumber,
+               company,
+               protocol,
+               vehicleType,
+               vehicleStatus,
+               createTime,
+               updateTime,
+               device_num
+        FROM vehicle_info
+    </sql>
+
+    <sql id="editConfigVo">
+        UPDATE vehicle_info
+        SET plateNumber=#{plateNumber},
+            company=#{company},
+            protocol=#{protocol},
+            vehicleType=#{vehicleType},
+            vehicleStatus=#{vehicleStatus},
+            device_num=#{deviceNum}
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="sqlWhereSearch">
+        <where>
+            <if test="vin !=''">
+                AND   LOCATE(#{vin}, vin)>0
+            </if>
+            <if test="plateNumber !=''">
+                AND   LOCATE(#{plateNumber}, plateNumber)>0
+            </if>
+            <if test="company !=''">
+                AND  LOCATE(#{company}, company)>0
+            </if>
+            <if test="protocol !=''">
+                AND  LOCATE(#{protocol}, protocol)>0
+            </if>
+            <if test="vehicleType !=''">
+                AND LOCATE(#{vehicleType}, vehicleType)>0
+            </if>
+            <if test="vehicleStatus !=''">
+                AND  LOCATE(#{vehicleStatus}, vehicleStatus)>0
+            </if>
+            <if test="deviceNum !=''">
+                AND  LOCATE(#{deviceNum}, device_num)>0
+            </if>
+        </where>
+    </sql>
+
+    <select id="list" resultType="com.deyi.daxie.cloud.vehicle.query.vo.VehicleInfo">
+        <include refid="selectConfigVo"/>
+        <include refid="sqlWhereSearch"/>
+         LIMIT #{start},#{end}
+    </select>
+
+    <select id="total" resultType="integer">
+        SELECT COUNT(1) FROM vehicle_info
+        <include refid="sqlWhereSearch"/>
+    </select>
+
+    <select id="info" resultType="com.deyi.daxie.cloud.vehicle.query.vo.VehicleInfo">
+        <include refid="selectConfigVo"/>
+        WHERE vin=#{vin}
+    </select>
+
+    <insert id="add" parameterType="com.deyi.daxie.cloud.vehicle.query.vo.VehicleInfo">
+        INSERT INTO vehicle_info (vin,
+                                  plateNumber,
+                                  company,
+                                  protocol,
+                                  vehicleType,
+                                  vehicleStatus,
+                                  createTime,
+                                  updateTime,
+                                  tsc_pwd,
+                                  device_num)
+        VALUES (#{vin},
+                #{plateNumber},
+                #{company},
+                #{protocol},
+                #{vehicleType},
+                #{vehicleStatus},
+                sysdate(),
+                sysdate(),
+                #{tscPwd},
+                ${deviceNum})
+    </insert>
+
+    <update id="edit" parameterType="com.deyi.daxie.cloud.vehicle.query.vo.VehicleInfo">
+        <include refid="editConfigVo"/>
+        WHERE vin= #{vin}
+    </update>
+
+    <delete id="remove">
+        DELETE
+        FROM vehicle_info
+        WHERE vin IN
+        <foreach collection="vin" index="index" item="item"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+
+    </delete>
+
+    <select id="getDeviceNum" resultType="java.lang.String" parameterType="java.lang.String">
+        select device_num from vehicle_info
+        <where>
+            <if test="deviceNum != null and deviceNum != ''">
+                and device_num like concat('%', #{deviceNum}, '%')
+            </if>
+        </where>
+    </select>
+    
+    <select id="selectByDeviceNum" resultType="com.deyi.daxie.cloud.vehicle.query.vo.VehicleInfo">
+        select tsc_pwd from vehicle_info
+        <where>
+            <if test="deviceNum != null and deviceNum != ''">
+                and device_num = #{deviceNum}
+            </if>
+        </where>
+    </select>
+</mapper>

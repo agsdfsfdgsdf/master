@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deyi.daxie.cloud.operation.mapper.ControlDataMapper">
+
+    <sql id="selectField">
+
+            id,
+            device_num,
+            longitude_r,
+            latitude_r,
+            longitude_d,
+            latitude_d,
+            speed_r,
+            speed_d,
+            speed_l,
+            throttle_r,
+            throttle_d,
+            throttle_s,
+            brake_r,
+            brake_d,
+            brake_s,
+            wheel_r,
+            wheel_d,
+            wheel_s,
+            gear_r,
+            gear_d,
+            light_r,
+            light_d,
+            is_cp,
+            cp_start,
+            cp_end,
+            device_time,
+            position,
+            dev_distance
+    </sql>
+    <select id="getLocation" parameterType="java.lang.String" resultType="com.deyi.daxie.cloud.operation.domain.ControlData">
+        <foreach collection="deviceNums" item="num" separator=") union all (" close=")" open="(">
+            select <include refid="selectField"/>
+            from vel_control_data where device_num = #{num} order by device_time desc limit 1
+        </foreach>
+    </select>
+
+    <select id="getByRange" resultType="com.deyi.daxie.cloud.operation.domain.ControlData">
+
+        select <include refid="selectField"/>
+        from vel_control_data where device_time &gt; #{startTime} and device_time &lt; #{endTime}
+    </select>
+</mapper>

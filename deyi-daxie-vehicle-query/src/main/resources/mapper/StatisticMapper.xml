@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.deyi.daxie.cloud.vehicle.query.mapper.StatisticMapper">
+
+    <select id="queryCount" resultType="int">
+        SELECT COUNT(1)
+        FROM vehcile_statistic
+        WHERE vin = #{vin}
+    </select>
+
+    <update id="update">
+        UPDATE vehcile_statistic
+        SET mileage=mileage + #{distance},
+            duration=duration + #{duration}
+        WHERE vin = #{vin}
+    </update>
+
+    <select id="add">
+        INSERT INTO vehcile_statistic (`id`, vin, mileage, duration) VALUE (null,#{vin},#{distance},#{duration})
+    </select>
+
+    <select id="total" resultType="com.deyi.daxie.cloud.vehicle.query.vo.Statistic">
+        SELECT SUM(mileage) AS mileage, SUM(duration) AS duration FROM vehcile_statistic WHERE `date` &lt;= #{date}
+    </select>
+
+
+</mapper>

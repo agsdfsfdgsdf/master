@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deyi.daxie.cloud.operation.mapper.WarnDataMapper">
+
+    <select id="getByRange" resultType="com.deyi.daxie.cloud.operation.domain.WarnData">
+        select
+            id,
+            device_num,
+            device_time,
+            warning_turnlight,
+            warning_speaker,
+            warning_tirepress,
+            warning_seatbelt,
+            warning_backlight,
+            warning_press,
+            warning_wiper,
+            warning_frontlight,
+            warning_led,
+            warning_alarm,
+            warning_break,
+            warning_acc,
+            warning_turn,
+            laser_lag,
+            singlelaser,
+            multilaser,
+            cameradata,
+            camera_lag,
+            mmradar_lag,
+            mmrader_bug,
+            wheelspeed_lag,
+            wheelspeed_SD,
+            anglearsensor_lag,
+            warning_hardbrake,
+            warning_LWT,
+            turn_mainstreet,
+            turn_inbay,
+            turn_dock,
+            turn_charge,
+            turn_curve,
+            GNSS_data,
+            GNSS_lag,
+            IMU_data,
+            IMU_sd,
+            location_sd
+        from vel_warn_data where device_time &gt; #{startTime} and device_time &lt; #{endTime}
+    </select>
+
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deyi.daxie.cloud.operation.mapper.AligningDataMapper">
+
+    <select id="getByRange" resultType="com.deyi.daxie.cloud.operation.domain.AligningData">
+        select
+            id,
+            container_dev,
+            Timestamp,
+            DeviceNo,
+            TruckNo,
+            container_no,
+            Rate,
+            Control_Mode
+        from vel_aligning_data where Timestamp &gt; #{startTime} and Timestamp &lt; #{endTime}
+    </select>
+
+</mapper>

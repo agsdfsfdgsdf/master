@@ -1,0 +1,27 @@
+server:
+  port: 4096
+  context-path: /
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/plain,text/css,application/x-javascript
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: Root123.
+    url: jdbc:mysql://192.168.1.16:3306/vehicle?useSSL=false&serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false
+    type: com.alibaba.druid.pool.DruidDataSource
+    transaction:
+      rollback-on-commit-failure: true
+
+  redis:
+    host: 192.168.1.16
+    port: 6379
+    database: 1
+  kafka:
+    bootstrap-servers: 192.168.1.16:9092
+
+mybatis:
+  type-aliases-package: org.web.emall.models
+  mapper-locations: classpath:mapper/*.xml

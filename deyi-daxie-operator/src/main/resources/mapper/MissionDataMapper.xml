@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deyi.daxie.cloud.operation.mapper.MissionDataMapper">
+
+    <select id="getByDeviceNums" resultType="com.deyi.daxie.cloud.operation.domain.MissionData">
+        <foreach collection="deviceNums" item="num" separator=") union all (" close=")" open="(">
+            select
+            table_id,
+            container_dev,
+            receivung_time,
+            finish_time,
+            device_num,
+            container_no,
+            id
+            from vel_mission_data where device_num = #{num} order by receivung_time desc limit 1
+        </foreach>
+    </select>
+
+    <select id="selectByRange" resultType="com.deyi.daxie.cloud.operation.domain.MissionData">
+        select
+            table_id,
+            container_dev,
+            receivung_time,
+            finish_time,
+            device_num,
+            container_no,
+            id
+        from vel_mission_data where finish_time &gt; #{startTime} and finish_time &lt; #{endTime}
+    </select>
+
+</mapper>

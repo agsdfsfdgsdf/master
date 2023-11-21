@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.deyi.daxie.cloud.vehicle.query.mapper.CameraMapper">
+
+    <sql id="selectConfigVo">
+        SELECT cameraId,
+               vin,
+               cameraPosition,
+               password,
+               accessToken,
+               accessUpdateId,
+               createTime,
+               updateTime
+        FROM vehicle_camera
+    </sql>
+
+    <sql id="editConfigVo">
+        UPDATE vehicle_camera
+        SET vin=#{vin},
+            cameraPosition=#{cameraPosition},
+            password=#{password},
+            accessToken=#{accessToken}
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="sqlWhereSearch">
+        <where>
+            <if test="vin !=''">
+                AND   LOCATE(#{vin}, vin)>0
+            </if>
+            <if test="cameraPosition !=''">
+                AND  LOCATE(#{cameraPosition}, cameraPosition)>0
+            </if>
+            <if test="cameraId !=''">
+                AND  cameraId=#{cameraId}
+            </if>
+
+        </where>
+    </sql>
+
+    <select id="list" resultType="com.deyi.daxie.cloud.vehicle.query.vo.CameraInfo">
+        <include refid="selectConfigVo"/>
+        <include refid="sqlWhereSearch"/>
+         LIMIT #{start},#{end}
+    </select>
+
+    <select id="total" resultType="integer">
+        SELECT COUNT(1) FROM vehicle_camera
+        <include refid="sqlWhereSearch"/>
+    </select>
+
+    <select id="detail" resultType="com.deyi.daxie.cloud.vehicle.query.vo.CameraInfo">
+        <include refid="selectConfigVo"/>
+        WHERE cameraId=#{cameraId}
+    </select>
+
+    <insert id="add" parameterType="com.deyi.daxie.cloud.vehicle.query.vo.CameraInfo">
+        INSERT INTO vehicle_camera (cameraId,
+                                    vin,
+                                    cameraPosition,
+                                    password,
+                                    accessToken,
+                                    accessUpdateId,
+                                    createTime,
+                                    updateTime)
+        VALUES (#{cameraId},
+                #{vin},
+                #{cameraPosition},
+                #{password},
+                #{accessToken},
+                #{accessUpdateId},
+                sysdate(),
+                sysdate())
+    </insert>
+
+    <update id="edit" parameterType="com.deyi.daxie.cloud.vehicle.query.vo.CameraInfo">
+        <include refid="editConfigVo"/>
+        WHERE cameraId= #{cameraId}
+    </update>
+
+    <delete id="remove">
+        DELETE
+        FROM vehicle_camera
+        WHERE cameraId = #{cameraId}
+    </delete>
+    <select id="updateAccess" parameterType="com.deyi.daxie.cloud.vehicle.query.vo.CameraInfo">
+        UPDATE vehicle_camera SET accessToken=#{accessToken} WHERE accessUpdateId=#{accessUpdateId}
+    </select>
+</mapper>
