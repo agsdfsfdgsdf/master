@@ -333,8 +333,7 @@ class VideoController {
 
             fos.close();
             inputStream.close();
-
-            System.out.println("the file: "+url+" download success");
+            log.info("the file: "+url+" download success");
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -545,7 +545,7 @@ public class VideoDemo {
         net_dvr_playcond.struStopTime.dwMinute=10;
         net_dvr_playcond.struStopTime.dwSecond=00;*/
         net_dvr_playcond.write();
-        String sFileName = "\\usr\\local\\webserver\\file\n\\Download\\" + System.currentTimeMillis() + ".mp4";
+        String sFileName = "\\usr\\local\\webserver\\file\\Download\\" + System.currentTimeMillis() + ".mp4";
         System.out.println(sFileName);
         m_lLoadHandle = hCNetSDK.NET_DVR_GetFileByTime_V40(userID,sFileName,net_dvr_playcond);
         if (m_lLoadHandle >= 0)
