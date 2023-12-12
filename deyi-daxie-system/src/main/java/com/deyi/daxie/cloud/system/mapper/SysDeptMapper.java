@@ -115,4 +115,6 @@ public interface SysDeptMapper
      * @return 结果
      */
     public int deleteDeptById(@Param("deptId")Long[] deptId);
+
+    int selectOne(String deptName);
 }

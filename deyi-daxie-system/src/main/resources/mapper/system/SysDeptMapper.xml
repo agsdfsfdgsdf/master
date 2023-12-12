@@ -167,5 +167,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{item}
 		</foreach>
 	</delete>
-
+	<select id="selectOne" resultType="integer">
+		select dept_id from sys_dept where dept_name = #{deptName}
+	</select>
 </mapper> 

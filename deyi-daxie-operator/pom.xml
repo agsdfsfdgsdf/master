@@ -97,6 +97,29 @@
             <groupId>com.deyi.daxie</groupId>
             <artifactId>deyi-daxie-common</artifactId>
         </dependency>
+        <!--zip4j依赖,解压zip压缩-->
+        <dependency>
+            <groupId>net.lingala.zip4j</groupId>
+            <artifactId>zip4j</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+        <!--解压rar压缩-->
+        <dependency>
+            <groupId>com.github.junrar</groupId>
+            <artifactId>junrar</artifactId>
+            <version>0.7</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.ant/ant -->
+        <dependency>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant</artifactId>
+            <version>1.10.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.deyi.daxie</groupId>
+            <artifactId>deyi-daxie-system</artifactId>
+        </dependency>
+        <!--zip-->
     </dependencies>
 
 </project>

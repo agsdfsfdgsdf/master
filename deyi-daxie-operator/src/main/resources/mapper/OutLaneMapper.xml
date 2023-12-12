@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deyi.daxie.cloud.operation.mapper.OutLaneMapper">
+
+    <resultMap id="BaseResultMap" type="com.deyi.daxie.cloud.operation.domain.OutLane">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="deviceNum" column="device_num" jdbcType="VARCHAR"/>
+            <result property="deviceTime" column="device_time" jdbcType="VARCHAR"/>
+            <result property="rprecLat" column="rprec_Lat" jdbcType="VARCHAR"/>
+            <result property="rprecLon" column="rprec_Lon" jdbcType="VARCHAR"/>
+            <result property="rprecAzimuth" column="rprec_Azimuth" jdbcType="VARCHAR"/>
+            <result property="rprecHeel" column="rprec_heel" jdbcType="VARCHAR"/>
+            <result property="rprecPitch" column="rprec_pitch" jdbcType="VARCHAR"/>
+            <result property="rprecAx" column="rprec_ax" jdbcType="VARCHAR"/>
+            <result property="rprecAy" column="rprec_ay" jdbcType="VARCHAR"/>
+            <result property="rprecAz" column="rprec_az" jdbcType="VARCHAR"/>
+            <result property="rprecNavspeed" column="rprec_NavSpeed" jdbcType="VARCHAR"/>
+            <result property="rprecRtkstatusstring" column="rprec_rtkStatusString" jdbcType="VARCHAR"/>
+            <result property="rprecNavstatusstring" column="rprec_navStatusString" jdbcType="VARCHAR"/>
+            <result property="rprecRtklaterror" column="rprec_rtklaterror" jdbcType="VARCHAR"/>
+            <result property="rprecRtklonerror" column="rprec_rtklonerror" jdbcType="VARCHAR"/>
+            <result property="rprecRtkazierror" column="rprec_rtkazierror" jdbcType="VARCHAR"/>
+            <result property="mobileLanelr0Lanequality" column="mobile_laneLR0_laneQuality" jdbcType="VARCHAR"/>
+            <result property="mobileLanelr0Viewrange" column="mobile_laneLR0_viewRange" jdbcType="VARCHAR"/>
+            <result property="mobileLanelr0C0" column="mobile_laneLR0_c0" jdbcType="VARCHAR"/>
+            <result property="mobileLanelr0C1" column="mobile_laneLR0_c1" jdbcType="VARCHAR"/>
+            <result property="mobileLanelr0C2" column="mobile_laneLR0_c2" jdbcType="VARCHAR"/>
+            <result property="mobileLanelr0C3" column="mobile_laneLR0_c3" jdbcType="VARCHAR"/>
+            <result property="mobileLanelr1Lanequality" column="mobile_laneLR1_laneQuality" jdbcType="VARCHAR"/>
+            <result property="mobileLanelr1Viewrange" column="mobile_laneLR1_viewRange" jdbcType="VARCHAR"/>
+            <result property="mobileLanelr1C0" column="mobile_laneLR1_c0" jdbcType="VARCHAR"/>
+            <result property="mobileLanelr1C1" column="mobile_laneLR1_c1" jdbcType="VARCHAR"/>
+            <result property="mobileLanelr1C2" column="mobile_laneLR1_c2" jdbcType="VARCHAR"/>
+            <result property="mobileLanelr1C3" column="mobile_laneLR1_c3" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,device_num,device_time,
+        rprec_Lat,rprec_Lon,rprec_Azimuth,
+        rprec_heel,rprec_pitch,rprec_ax,
+        rprec_ay,rprec_az,rprec_NavSpeed,
+        rprec_rtkStatusString,rprec_navStatusString,rprec_rtklaterror,
+        rprec_rtklonerror,rprec_rtkazierror,mobile_laneLR0_laneQuality,
+        mobile_laneLR0_viewRange,mobile_laneLR0_c0,mobile_laneLR0_c1,
+        mobile_laneLR0_c2,mobile_laneLR0_c3,mobile_laneLR1_laneQuality,
+        mobile_laneLR1_viewRange,mobile_laneLR1_c0,mobile_laneLR1_c1,
+        mobile_laneLR1_c2,mobile_laneLR1_c3
+    </sql>
+    <insert id="save">
+        insert into out_lane(id,device_num,device_time,
+        rprec_Lat,rprec_Lon,rprec_Azimuth,
+        rprec_heel,rprec_pitch,rprec_ax,
+        rprec_ay,rprec_az,rprec_NavSpeed,
+        rprec_rtkStatusString,rprec_navStatusString,rprec_rtklaterror,
+        rprec_rtklonerror,rprec_rtkazierror,mobile_laneLR0_laneQuality,
+        mobile_laneLR0_viewRange,mobile_laneLR0_c0,mobile_laneLR0_c1,
+        mobile_laneLR0_c2,mobile_laneLR0_c3,mobile_laneLR1_laneQuality,
+        mobile_laneLR1_viewRange,mobile_laneLR1_c0,mobile_laneLR1_c1,
+        mobile_laneLR1_c2,mobile_laneLR1_c3) values
+        <foreach collection="list" item="outLane" separator=",">
+            (null,#{outLane.deviceNum}, #{outLane.deviceTime},#{outLane.rprecLat},
+            #{outLane.rprecLon},#{outLane.rprecAzimuth},
+            #{outLane.rprecHeel},#{outLane.rprecPitch},
+            #{outLane.rprecAx},#{outLane.rprecAy},
+            #{outLane.rprecAz},#{outLane.rprecNavspeed},
+            #{outLane.rprecRtkstatusstring},#{outLane.rprecNavstatusstring},
+            #{outLane.rprecRtklaterror},#{outLane.rprecRtklonerror},
+            #{outLane.rprecRtkazierror},#{outLane.mobileLanelr0Lanequality},
+            #{outLane.mobileLanelr0Viewrange},#{outLane.mobileLanelr0C0},
+            #{outLane.mobileLanelr0C1},#{outLane.mobileLanelr0C2},
+            #{outLane.mobileLanelr0C3},#{outLane.mobileLanelr1Lanequality},
+            #{outLane.mobileLanelr1Viewrange},#{outLane.mobileLanelr1C0},
+            #{outLane.mobileLanelr1C1},#{outLane.mobileLanelr1C2},
+            #{outLane.mobileLanelr1C3})
+        </foreach>
+    </insert>
+</mapper>

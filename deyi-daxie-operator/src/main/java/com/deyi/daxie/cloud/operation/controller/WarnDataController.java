@@ -8,14 +8,11 @@ import com.deyi.daxie.cloud.operation.domain.dto.WarnDataTypeDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 import java.util.Map;
 
-import com.deyi.daxie.cloud.operation.domain.WarnData;
 import com.deyi.daxie.cloud.operation.domain.vo.WarnDataVo;
 import com.deyi.daxie.cloud.operation.service.WarnDataService;
 

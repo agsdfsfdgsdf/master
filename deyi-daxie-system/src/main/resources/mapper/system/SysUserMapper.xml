@@ -220,5 +220,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			#{userId}
         </foreach> 
  	</delete>
-	
+	<select id="selectByDept" resultType="java.lang.String">
+		select email from sys_user where dept_id = #{deptId}
+	</select>
 </mapper> 

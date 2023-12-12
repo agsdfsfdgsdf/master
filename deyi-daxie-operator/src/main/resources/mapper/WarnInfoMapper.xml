@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deyi.daxie.cloud.operation.mapper.WarnInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.deyi.daxie.cloud.operation.domain.WarnInfo">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="deviceTime" column="device_time" jdbcType="TIMESTAMP"/>
+            <result property="deviceNum" column="device_num" jdbcType="VARCHAR"/>
+            <result property="type" column="type" jdbcType="VARCHAR"/>
+            <result property="grade" column="grade" jdbcType="VARCHAR"/>
+            <result property="content" column="content" jdbcType="VARCHAR"/>
+            <result property="lat" column="lat" jdbcType="VARCHAR"/>
+            <result property="lon" column="lon" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="typeCount" column="typeCount" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,device_time,device_num,
+        type,grade,content,
+        lat,lon,create_time
+    </sql>
+    <insert id="insert">
+        insert into warn_info (id,device_time,device_num,
+                               type,grade,content,
+                               lat,lon,create_time) value
+            (null,#{deviceTime},#{deviceNum},#{type},#{grade},#{content},#{lat},#{lon},#{createTime})
+    </insert>
+    <select id="selectByTime" resultType="com.deyi.daxie.cloud.operation.domain.WarnInfo">
+        SELECT
+            device_num,
+                grade,
+                count(`grade`) as typeCount
+        FROM warn_info where device_time like concat('%',#{deviceTime,jdbcType=TIMESTAMP},'%') GROUP BY device_num,grade
+    </select>
+</mapper>

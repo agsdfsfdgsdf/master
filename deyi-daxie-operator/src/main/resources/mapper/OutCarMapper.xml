@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deyi.daxie.cloud.operation.mapper.OutCarMapper">
+    <resultMap id="BaseResultMap" type="com.deyi.daxie.cloud.operation.domain.OutCar">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="deviceNum" column="device_num" jdbcType="VARCHAR"/>
+            <result property="deviceTime" column="device_time" jdbcType="VARCHAR"/>
+            <result property="lat" column="lat" jdbcType="VARCHAR"/>
+            <result property="lon" column="lon" jdbcType="VARCHAR"/>
+            <result property="azi" column="azi" jdbcType="VARCHAR"/>
+            <result property="vh" column="vh" jdbcType="VARCHAR"/>
+            <result property="aimspeed" column="aimSpeed" jdbcType="VARCHAR"/>
+            <result property="aimsteer" column="aimSteer" jdbcType="VARCHAR"/>
+            <result property="obsdistance" column="obsDistance" jdbcType="VARCHAR"/>
+            <result property="vl" column="vl" jdbcType="VARCHAR"/>
+            <result property="u" column="u" jdbcType="VARCHAR"/>
+            <result property="controlspeed" column="controlSpeed" jdbcType="VARCHAR"/>
+            <result property="controlbrake" column="controlBrake" jdbcType="VARCHAR"/>
+            <result property="realspeedrecF2" column="realSpeedRec_F2" jdbcType="VARCHAR"/>
+            <result property="steerreceive" column="steerReceive" jdbcType="VARCHAR"/>
+            <result property="realpressure1" column="realPressure1" jdbcType="VARCHAR"/>
+            <result property="realpressure2" column="realPressure2" jdbcType="VARCHAR"/>
+            <result property="ttc" column="ttc" jdbcType="VARCHAR"/>
+            <result property="ttcr" column="ttcr" jdbcType="VARCHAR"/>
+            <result property="vt" column="vt" jdbcType="VARCHAR"/>
+            <result property="automode" column="AutoMode" jdbcType="VARCHAR"/>
+            <result property="offsetForm" column="offset_form" jdbcType="VARCHAR"/>
+            <result property="lightflag" column="lightFlag" jdbcType="VARCHAR"/>
+            <result property="readpressure3" column="readPressure3" jdbcType="VARCHAR"/>
+            <result property="y" column="y" jdbcType="VARCHAR"/>
+            <result property="brakeswtich" column="brakeSwtich" jdbcType="VARCHAR"/>
+            <result property="gpsline0V1" column="gpsline0_v1" jdbcType="VARCHAR"/>
+            <result property="gpsline0V2" column="gpsline0_v2" jdbcType="VARCHAR"/>
+            <result property="gpsline0X" column="gpsline0_x" jdbcType="VARCHAR"/>
+            <result property="parkdis" column="parkdis" jdbcType="VARCHAR"/>
+            <result property="stoplastdis" column="stoplastdis" jdbcType="VARCHAR"/>
+            <result property="modestop" column="modestop" jdbcType="VARCHAR"/>
+            <result property="recgear" column="recGear" jdbcType="VARCHAR"/>
+            <result property="getgearrecord" column="GetGearRecord" jdbcType="VARCHAR"/>
+            <result property="stoprecorddistance" column="StopRecordDistance" jdbcType="VARCHAR"/>
+            <result property="stoprecordmode1" column="StopRecordMode1" jdbcType="VARCHAR"/>
+            <result property="stoprecordmode2" column="stoprecordmode2" jdbcType="VARCHAR"/>
+            <result property="nextrpItem1" column="nextrp_Item1" jdbcType="VARCHAR"/>
+            <result property="nextrpItem2" column="nextrp_Item2" jdbcType="VARCHAR"/>
+            <result property="longitudeacc" column="LongitudeAcc" jdbcType="VARCHAR"/>
+            <result property="canspeed2" column="canSpeed2" jdbcType="VARCHAR"/>
+            <result property="gearstr" column="gearstr" jdbcType="VARCHAR"/>
+            <result property="recgeardetail" column="recGearDetail" jdbcType="VARCHAR"/>
+            <result property="motortorque" column="motorTorque" jdbcType="VARCHAR"/>
+            <result property="motorspeed" column="motorSpeed" jdbcType="VARCHAR"/>
+            <result property="realspeedrecF1" column="realSpeedRec_F1" jdbcType="VARCHAR"/>
+            <result property="warn1" column="warn1" jdbcType="VARCHAR"/>
+            <result property="warn2" column="warn2" jdbcType="VARCHAR"/>
+            <result property="warn3" column="warn3" jdbcType="VARCHAR"/>
+            <result property="warn4" column="warn4" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,device_num,device_time,
+        lat,lon,azi,
+        vh,aimSpeed,aimSteer,
+        obsDistance,vl,u,
+        controlSpeed,controlBrake,realSpeedRec_F2,
+        steerReceive,realPressure1,realPressure2,
+        ttc,ttcr,vt,
+        AutoMode,lightFlag,readPressure3,
+        y,brakeSwtich,gpsline0_v1,
+        gpsline0_v2,gpsline0_x,parkdis,
+        stoplastdis,modestop,recGear,
+        GetGearRecord,StopRecordDistance,StopRecordMode1,
+        stoprecordmode2,nextrp_Item1,nextrp_Item2,
+        LongitudeAcc,canSpeed2,gearstr,
+        recGearDetail,motorTorque,motorSpeed,
+        realSpeedRec_F1,warn1,warn2,
+        warn3,warn4,offset_form
+    </sql>
+    <insert id="save">
+        insert into out_car(id,device_num,device_time,
+        lat,lon,azi,
+        vh,aimSpeed,aimSteer,
+        obsDistance,vl,u,
+        controlSpeed,controlBrake,realSpeedRec_F2,
+        steerReceive,realPressure1,realPressure2,
+        ttc,ttcr,vt,
+        AutoMode,offset_form,lightFlag,readPressure3,
+        y,brakeSwtich,gpsline0_v1,
+        gpsline0_v2,gpsline0_x,parkdis,
+        stoplastdis,modestop,recGear,
+        GetGearRecord,StopRecordDistance,StopRecordMode1,
+        stoprecordmode2,nextrp_Item1,nextrp_Item2,
+        LongitudeAcc,canSpeed2,gearstr,
+        recGearDetail,motorTorque,motorSpeed,
+        realSpeedRec_F1,warn1,warn2,
+        warn3,warn4) values
+        <foreach collection="list" item="outCar" separator="," >
+            (null,#{outCar.deviceNum}, #{outCar.deviceTime},#{outCar.lat},
+            #{outCar.lon}, #{outCar.azi},#{outCar.vh},
+            #{outCar.aimspeed}, #{outCar.aimsteer},#{outCar.obsdistance},
+            #{outCar.vl}, #{outCar.u},#{outCar.controlspeed},
+            #{outCar.controlbrake}, #{outCar.realspeedrecF2},#{outCar.steerreceive},
+            #{outCar.realpressure1}, #{outCar.realpressure2},#{outCar.ttc},
+            #{outCar.ttcr}, #{outCar.vt},#{outCar.automode},#{outCar.offsetForm},
+            #{outCar.lightflag}, #{outCar.readpressure3},#{outCar.y},
+            #{outCar.brakeswtich}, #{outCar.gpsline0V1},#{outCar.gpsline0V2},
+            #{outCar.gpsline0X}, #{outCar.parkdis},#{outCar.stoplastdis},
+            #{outCar.modestop}, #{outCar.recgear},#{outCar.getgearrecord},
+            #{outCar.stoprecorddistance}, #{outCar.stoprecordmode1},#{outCar.stoprecordmode2},
+            #{outCar.nextrpItem1}, #{outCar.nextrpItem2},#{outCar.longitudeacc},
+            #{outCar.canspeed2}, #{outCar.gearstr},#{outCar.recgeardetail},
+            #{outCar.motortorque}, #{outCar.motorspeed},#{outCar.realspeedrecF1},
+            #{outCar.warn1}, #{outCar.warn2},#{outCar.warn3},
+            #{outCar.warn4})
+        </foreach>
+    </insert>
+</mapper>
