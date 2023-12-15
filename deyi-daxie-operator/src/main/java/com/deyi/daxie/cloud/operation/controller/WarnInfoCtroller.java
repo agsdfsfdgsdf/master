@@ -10,16 +10,17 @@ import com.deyi.daxie.cloud.operation.service.WarnDataService;
 import com.deyi.daxie.cloud.operation.service.WarnInfoService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
-
+@RestController
+@RequestMapping("warn-data")
+@Api(tags = "报警数据")
 public class WarnInfoCtroller {
     @Autowired
     private WarnInfoService service;

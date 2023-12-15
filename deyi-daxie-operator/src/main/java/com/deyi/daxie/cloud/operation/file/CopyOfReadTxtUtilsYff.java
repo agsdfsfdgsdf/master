@@ -47,7 +47,7 @@ public class CopyOfReadTxtUtilsYff implements FileService {
                 }
                 for (String fileName : fileArray) {
                     System.out.println(fileName);
-                    File file = new File(filePath + "\\" + fileName);
+                    File file = new File(filePath + "/" + fileName);
                     fileName = fileName.substring(0, fileName.indexOf("."));
                     //判断文件是否存在
                     if (file.isFile() && file.exists()) {
@@ -212,7 +212,7 @@ public class CopyOfReadTxtUtilsYff implements FileService {
             return AjaxList.createFail("上传的压缩包格式不正确,仅支持rar和zip压缩文件!");
         }
         File file = new File(packFilePath);
-        String dict =path+"\\"+zipFile.getName();
+        String dict =path+"/"+zipFile.getName();
         try {
             zipFile.transferTo(file);
         } catch (IOException e) {
@@ -245,7 +245,7 @@ public class CopyOfReadTxtUtilsYff implements FileService {
         }
         getAllFile(dir, allFileList,basePath);
         for (FileMove file : allFileList) {
-            file.getFile().renameTo(new File(basePath+"\\"+file.getFile().getName()));
+            file.getFile().renameTo(new File(basePath+"/"+file.getFile().getName()));
         }
         deleteFolder(new File(basePath));
         System.out.println("该文件夹下共有" + allFileList.size() + "个文件");
@@ -259,7 +259,7 @@ public class CopyOfReadTxtUtilsYff implements FileService {
             if (file.isDirectory()) {
                 // 递归处理文件夹
                 // 如果不想统计子文件夹则可以将下一行注释掉
-                dict = basePath+"\\"+file.getName();
+                dict = basePath+"/"+file.getName();
                 getAllFile(file, allFileList,basePath);
             } else {
                 FileMove fileMove = new FileMove();

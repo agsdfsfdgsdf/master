@@ -3,6 +3,7 @@ package com.deyi.daxie.cloud.operation.job;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.deyi.daxie.cloud.operation.domain.JobDetail;
 import com.deyi.daxie.cloud.operation.file.FileService;
+import com.deyi.daxie.cloud.operation.file.SplitFile;
 import com.deyi.daxie.cloud.operation.mapper.JobDetailMapper;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -27,12 +28,12 @@ public class TaskJob {
     public void uploadJob() {
         List<JobDetail> wd =getWrapper("uploadJob");
         for(JobDetail jobDetail:wd){
-            //SplitFile.splitDataToSaveFile(10000,jobDetail.getDict());
+            SplitFile.splitDataToSaveFile(10000,jobDetail.getDict());
             fileService.parseFile(jobDetail.getDict(),jobDetail.getFlag(),jobDetail.getDeviceNum());
         }
         System.out.println("通过cron定义的定时任务");
     }
-    @Scheduled(cron = "0 30 22 * * ?")
+    @Scheduled(cron = "0 50 22 * * ?")
     public void deleteJob() {
         taskService.dropData();
         System.out.println("通过cron定义的定时任务");

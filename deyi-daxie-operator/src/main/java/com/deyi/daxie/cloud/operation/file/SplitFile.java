@@ -20,7 +20,7 @@ public class SplitFile {
         }
         for (String fileName : fileArray) {
             System.out.println(fileName);
-            File file = new File(targetDirectoryPath + "\\" + fileName);
+            File file = new File(targetDirectoryPath + "/" + fileName);
             fileName = fileName.substring(0, fileName.indexOf("."));
             long startTime = System.currentTimeMillis();
             log.info("开始分割文件");
